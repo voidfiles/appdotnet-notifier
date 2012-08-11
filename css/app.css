@@ -1,0 +1,31 @@
+html {
+    background-image: url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/noise_lines.png);
+}
+body {
+    background-color: transparent;
+    background-image: none;
+}
+
+/* Nav bar */
+.navbar-inner {
+    background-color: transparent;
+    box-shadow: none;
+    background-image: none;
+}
+
+.navbar .brand {
+    float: right;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+/* my app */
+
+.app.container {
+    margin-top: 60px;
+}
+
+.hero-unit {
+    background-color: rgba(200, 200, 200, .5);
+}
+

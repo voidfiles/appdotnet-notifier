@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notifications for App.net</title>
+    <link rel="stylesheet" type="text/css" href="../css/deps/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/app.css">
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand pull-right" href=".">App.net Notifier</a>
+            </div>
+        </div>
+    </div>
+    <div class="container app">
+        <section class='js-authorize'>
+            <div class='hero-unit'>
+                <h1>Please &rarr; <a href='#authorize' class='js-authorize-click'>authorize</a></h1>
+                <p>Before we get started you must authorize this app on App.net</p>
+            </div>
+        </section>
+        <section class='js-running hide'>
+
+        </section>
+    </div>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script src='../js/deps/jquery.URI.min.js'></script>
+    <script type="text/javascript">
+        var NOTIFIER_OPTIONS = {
+            client_id: '',
+            redirect_uri: ''
+        };
+    </script>
+    <script src='../js/app.js'></script>
+</body>
+</html>
