@@ -1,16 +1,26 @@
 window.APPDOTNET = (function () {
 
     var default_options = {
-        api_host: 'api.app.net',
+        api_host: 'alpha-api.app.net',
         auth_host: 'alpha.app.net',
-        url_base: '/stream/0/'
+        url_base: '/stream/0/',
+        authorize_endpoint: '/oauth/authenticate'
     };
 
     var API = {
 
         /* Before init you need to get an access token */
+        /* Think of this like a static function versus a class method */
+        get_authorization_url: function (options) {
+            var local_options = $.extend({}, default_options, options);
+            var url = URI('https://' + local_options.auth_host + local_options.authorize_endpoint);
 
-        get_authorization_url: function (scopes) {
+            url.addSearch('client_id', local_options.client_id);
+            url.addSearch('redirect_uri', local_options.redirect_uri);
+            url.addSearch('response_type', 'token');
+            url.addSearch('scope', 'stream');
+
+            return '' + url;
 
         },
 
@@ -30,13 +40,27 @@ window.APPDOTNET = (function () {
         },
 
         request: function (location, ajax_options) {
+            ajax_options.data = ajax_options.data || {};
 
             ajax_options.url = this.options.root_url + location;
+            console.log(ajax_options);
+            ajax_options.data.access_token = this.options.access_token;
 
             return $.ajax(ajax_options);
         },
 
-        post: function (text, reply_to) {
+        users: function (user_id) {
+            user_id = user_id || 'me';
+            var options = {
+                type: 'GET'
+            };
+
+            var url = 'users/' + user_id;
+
+            return this.request(url, options);
+        },
+
+        posts: function (text, reply_to) {
             var options = {
                 type: 'POST',
                 data: {
@@ -51,7 +75,17 @@ window.APPDOTNET = (function () {
             return this.request('posts', options);
         },
 
-        follow: function (user_id, new_state) {
+        delete_post: function (post_id) {
+            var options = {
+                type: 'DELETE'
+            };
+
+            var url = 'posts/' + post_id;
+
+            return this.request(url, options);
+        },
+
+        follows: function (user_id, new_state) {
             var options = {
                 data: {
                     user_id: user_id
@@ -67,16 +101,8 @@ window.APPDOTNET = (function () {
                 throw "Invalid follow state.";
             }
             return this.request('users/' + user_id + '/follow', options);
-        },
-        delete_post: function (post_id) {
-            var options = {
-                type: 'DELETE'
-            };
-
-            var url = 'posts/' + post_id;
-
-            return this.request(url, options);
         }
+
     };
 
     return API;

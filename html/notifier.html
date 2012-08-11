@@ -21,16 +21,30 @@
             </div>
         </section>
         <section class='js-running hide'>
-
+            <div class='hero-unit authorized-user'>
+                <div class='highlight'>
+                    <h1 class='js-username'></h1>
+                    <p class='js-user-bio user-bio'></p>
+                </div>
+            </div>
         </section>
     </div>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-    <script src='../js/deps/jquery.URI.min.js'></script>
+    <script src='../js/deps/URI.js'></script>
+    <script src='../js/appdotnet_api_client.js'></script>
     <script type="text/javascript">
+
         var NOTIFIER_OPTIONS = {
-            client_id: '',
-            redirect_uri: ''
+            client_id: 'nFvLKw6p54MA7XB7pm6cutEghrPgEMQM',
+            redirect_uri: 'http://alexkessinger.net/projects/appdotnet-notifier/html/notifier.html'
         };
+
+        /* Prod
+        var NOTIFIER_OPTIONS = {
+            client_id: 'FGghTYVuhtxzEJyc6DgcEeEnGtcvcca7',
+            redirect_uri: 'http://developing.alexkessinger.net:8000/html/notifier.html'
+        };
+        */
     </script>
     <script src='../js/app.js'></script>
 </body>
