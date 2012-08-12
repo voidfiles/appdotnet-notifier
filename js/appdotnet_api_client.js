@@ -43,7 +43,6 @@ window.APPDOTNET = (function () {
             ajax_options.data = ajax_options.data || {};
 
             ajax_options.url = this.options.root_url + location;
-            console.log(ajax_options);
             ajax_options.data.access_token = this.options.access_token;
 
             return $.ajax(ajax_options);
@@ -56,6 +55,17 @@ window.APPDOTNET = (function () {
             };
 
             var url = 'users/' + user_id;
+
+            return this.request(url, options);
+        },
+
+        mentions: function (user_id) {
+            user_id = user_id || 'me';
+            var options = {
+                type: 'GET'
+            };
+
+            var url = 'users/' + user_id + '/mentions';
 
             return this.request(url, options);
         },
