@@ -26,10 +26,10 @@
 
         API.users().done(function (data) {
             running.find('.authorized-user').css({
-                'background-image': 'url(' + data.cover_image.url + ')'
+                'background-image': 'url(' + data.data.cover_image.url + ')'
             });
-            running.find('.js-username').text(data.username);
-            running.find('.js-user-bio').html(data.description.html);
+            running.find('.js-username').text(data.data.username);
+            running.find('.js-user-bio').html(data.data.description.html);
             swap_panels();
         });
 
@@ -56,7 +56,7 @@
         };
 
         poll_for_new_mentions(function (data) {
-            $.each(data, function (i, el) {
+            $.each(data.data, function (i, el) {
                 date = 0 + Date.parse(el.created_at);
                 if (date > last_mention_time) {
                     last_mention_time = date;
@@ -65,6 +65,7 @@
         });
 
         var announce = function (mention) {
+            
             console.log('new mention', mention);
             var notification = window.webkitNotifications.createNotification(
                 mention.user.avatar_image.url,
@@ -83,7 +84,7 @@
 
         setInterval(function () {
             poll_for_new_mentions(function (data) {
-                $.each(data, function (i, el) {
+                $.each(data.data, function (i, el) {
                     date = 0 + Date.parse(el.created_at);
                     if (date > last_mention_time) {
                         last_mention_time = date;
